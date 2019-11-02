@@ -13,7 +13,8 @@ class PlayScene extends Phaser.Scene {
   create() {
     const camera = this.cameras.main;
     const cursors = this.input.keyboard.createCursorKeys();
-    camera.setBounds(0, 0, this.game.config.width, this.game.config.height);
+    //camera.setBounds(0, 0, this.game.config.width, this.game.config.height);
+    //camera.setViewport(0, 0, 200, 100);
 
     this.ball = new Ball(this, 100, 100);
     this.ball.setCollideWorldBounds(true);
@@ -21,6 +22,9 @@ class PlayScene extends Phaser.Scene {
     // Left paddle
     this.leftPaddle = new Paddle(this, 30, this.game.config.height / 2, 20, 80);
     //this.physics.add.collider(this.ball, this.leftPaddle);
+    //console.log(camera);
+    camera.startFollow(this.ball);
+    camera.setBounds(0, 0, this.game.config.width, this.game.config.height);
 
     // Right paddle
     this.rightPaddle = new Paddle(
@@ -45,6 +49,12 @@ class PlayScene extends Phaser.Scene {
       })
       .setScrollFactor(0);
       */
+
+    let rightSideRect = this.addPhysicalRectangle(495, 150, 10, 300, 1, 0);
+    this.physics.add.collider(rightSideRect, this.ball, this.rightSideHit);
+
+    let leftSideRect = this.addPhysicalRectangle(5, 150, 10, 300, 1, 0);
+    this.physics.add.collider(leftSideRect, this.ball, this.leftSideHit);
   }
 
   Lpaddlehit(paddle, ball) {
@@ -55,6 +65,12 @@ class PlayScene extends Phaser.Scene {
     console.log("Rpaddlehit");
   }
 
+  leftSideHit(paddle, ball) {
+    alert("leftSideHit");
+  }
+  rightSideHit(paddle, ball) {
+    alert("rightSideHit");
+  }
   update(time, delta) {
     this.ball.update(time, delta);
     this.leftPaddle.update(time, delta);
