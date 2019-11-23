@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import PlayScene from "./PlayScene";
+import PlayScene from "./PlayScene.js";
 import Ball from "../classes/Ball.js";
 import Paddle from "../classes/Paddle.js";
 import Door from "../classes/Door.js";
@@ -81,6 +81,7 @@ export default class Introduction extends Phaser.Scene {
   }
   leftSideHit(paddle, ball) {
     console.log("leftSideHit");
+    this.scene.remove("Introduction");
     this.scene.start("PlayScene");
   }
 
