@@ -6,16 +6,22 @@ export default class PlayScene extends Phaser.Scene {
     super("PlayScene");
   }
 
-  preload() {}
+  preload() {
+    alert("preload of PlayScene");
+  }
 
   create() {
+    alert("play scene create");
+    console.log("playscene");
     const camera = this.cameras.main;
-    const cursors = this.input.keyboard.createCursorKeys();
     //camera.setBounds(0, 0, this.game.config.width, this.game.config.height);
     //camera.setViewport(0, 0, 200, 100);
 
-    //this.ball = new Ball(this, 100, 100);
-    this.Door = new Door(this, 490, 290);
+    this.ball = new Ball(this, 100, 100);
+    this.ball.setCollideWorldBounds(true);
+    this.door = new Door(this, 480, 300);
+    this.door.setCollideWorldBounds(true);
+    this.backgroundImage = this.add.image();
     //this.ball.setCollideWorldBounds(true);
 
     // Left paddle
@@ -24,7 +30,7 @@ export default class PlayScene extends Phaser.Scene {
     //console.log(camera);
     camera.startFollow(this.ball);
     camera.setBounds(0, 0, this.game.config.width, this.game.config.height);
-
+    console.log("created scene");
     // Right paddle
     //this.rightPaddle = new Paddle(
     //  this,
@@ -53,31 +59,6 @@ export default class PlayScene extends Phaser.Scene {
     this.physics.add.collider(leftSideRect, this.ball, this.leftSideHit);
   */
   }
-  /*
-  Lpaddlehit(paddle, ball) {
-    console.log("Lpaddlehit");
-  }
-
-  Rpaddlehit(paddle, ball) {
-    console.log("Rpaddlehit");
-  }
-
-  leftSideHit(paddle, ball) {
-    console.log("leftSideHit");
-  }
-  rightSideHit(paddle, ball) {
-    console.lo("rightSideHit");
-  }
-  update(time, delta) {
-    this.ball.update(time, delta);
-    this.leftPaddle.update(time, delta);
-    this.rightPaddle.update(time, delta);
-  }
-
-  
-  //
-  //
-
   generateRectangleSprite(width, height) {
     // Returns key of generated sprite object
     let spriteKey = "rectangle-sprite-" + width + "x" + height;
@@ -95,13 +76,14 @@ export default class PlayScene extends Phaser.Scene {
     // Returns key of generated sprite object
     return this.generateRectangleSprite(width, width);
   }
-
-  addPhysicalRectangle(x, y, width, height, color, alphaIThinkMaybe) {
-    // TODO: alphaIThinkMaybe name change
-    let rect = this.add.rectangle(x, y, width, height, color, alphaIThinkMaybe);
-    rect = this.physics.add.existing(rect, true);
-
-    return rect;
+  /*
+  update(time, delta) {
+    this.ball.update(time, delta);
+    this.leftPaddle.update(time, delta);
+    this.rightPaddle.update(time, delta);
   }
-*/
+
+  */
+  //
+  //
 }
