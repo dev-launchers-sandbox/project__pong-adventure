@@ -31,6 +31,9 @@ export default class PlayScene extends Phaser.Scene {
     this.door.setCollideWorldBounds(true);
     this.character = new Character(this, 50, 100);
     this.character.setCollideWorldBounds(true);
+    this.physics.add.collider([this.door], this.character, () => {
+      alert("door has interactide with character ");
+    });
 
     //this.ball.setCollideWorldBounds(true);
 
