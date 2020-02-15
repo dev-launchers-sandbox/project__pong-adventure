@@ -45,7 +45,7 @@ export default class Paddle extends Phaser.Physics.Arcade.Sprite {
     const keys = this.keys;
 
     if (keys.up.isDown) {
-      this.setVelocity(0, -300);
+      this.setVelocity(0, -350);
     } else if (keys.down.isDown) {
       this.setVelocity(0, 300);
     }

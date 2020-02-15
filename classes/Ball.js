@@ -11,10 +11,10 @@ export default class Ball extends Phaser.Physics.Arcade.Sprite {
     scene.physics.add.existing(this);
 
     this.setDrag(0, 0)
-      .setMaxVelocity(400, 400)
+      .setMaxVelocity(350, 350)
       .setBounce(3.2, 1);
 
-    this.setVelocity(100, 100);
+    this.setVelocity(350, 350);
   }
 
   update() {}

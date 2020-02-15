@@ -10,6 +10,7 @@ export default class Title extends Phaser.Scene {
   preload() {
     this.load.image("pongthumbnail", "./assets/pongthumbnail.png");
   }
+  actionOnClick() {}
 
   create() {
     const camera = this.cameras.main;
@@ -18,6 +19,8 @@ export default class Title extends Phaser.Scene {
       this.game.config.height / 2,
       "pongthumbnail"
     );
+    //this.button = this.game.add.button(this.game.world.centerX - 95,
+    // 100, 'button', this.actiononClick, this, 2, 1, 0)
     this.backgroundImage
       .setInteractive()
       .on("pointerdown", (pointer, localX, localY, event) => {
@@ -26,6 +29,7 @@ export default class Title extends Phaser.Scene {
       });
   }
 }
+
 const config = {
   type: Phaser.AUTO,
   width: 500,
@@ -38,7 +42,7 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { x: 0, y: 0 }
+      gravity: { x: 0, y: 10 }
     }
   }
 };
