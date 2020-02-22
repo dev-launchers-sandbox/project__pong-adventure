@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import Ball from "../classes/Ball.js";
 import Door from "../classes/Door.js";
 import Character from "../classes/Character.js";
-
+import Coin from "../classes/Coin.js";
 export default class PlayScene extends Phaser.Scene {
   constructor() {
     super("PlayScene");
@@ -11,6 +11,7 @@ export default class PlayScene extends Phaser.Scene {
   preload() {
     alert("preload of PlayScene");
     this.load.image("background", "./assets/background.png");
+    this.load.image("coin", "./assets/coin-pixilart.png");
     this.load.spritesheet("pong", "./assets/pong.png", {
       frameWidth: 32,
       frameHeight: 32,
@@ -32,7 +33,22 @@ export default class PlayScene extends Phaser.Scene {
     this.character = new Character(this, 50, 100);
     this.character.setCollideWorldBounds(true);
     this.physics.add.collider([this.door], this.character, () => {
-      alert("door has interactide with character ");
+      console.log("door has interactide with character ");
+    });
+
+    // Doing coin stuff here!
+    this.coin1 = new Coin(this, 100, 200);
+    this.coin2 = new Coin(this, 200, 200);
+    this.coin3 = new Coin(this, 300, 200);
+    this.physics.add.collider([this.coin1], this.character, () => {
+      this.coin1.collect();
+    });
+    this.physics.add.collider([this.coin2], this.character, () => {
+      this.coin2.collect();
+    });
+
+    this.physics.add.collider([this.coin3], this.character, () => {
+      this.coin3.collect();
     });
 
     //this.ball.setCollideWorldBounds(true);
