@@ -5,6 +5,8 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, "character", 0);
     this.scene = scene;
 
+    this.id = Math.random();
+
     // Add this to the scene as a Phaser game object
     scene.add.existing(this);
     // Create the physics-based sprite that we will move around and animate
@@ -77,6 +79,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
   }
 
   update() {
+    console.log(this.id);
     const keys = this.keys;
     const sprite = this.sprite;
     const onGround = sprite.body.blocked.down;
@@ -112,5 +115,11 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
     //   sprite.anims.stop();
     //   sprite.setTexture("pong", 4);
     // }
+  }
+
+  destroy() {
+    // Because we're using events to hook into scene's update, we have to unhook!
+    this.scene.events.off("update", this.update, this);
+    super.destroy();
   }
 }
